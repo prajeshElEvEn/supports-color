@@ -77,10 +77,6 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 
 	const forceColor = sniffFlags ? flagForceColor : noFlagForceColor;
 
-	if (forceColor !== undefined) {
-		return forceColor;
-	}
-
 	if (sniffFlags) {
 		if (hasFlag('color=16m')
 			|| hasFlag('color=full')
@@ -91,6 +87,10 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 		if (hasFlag('color=256')) {
 			return 2;
 		}
+	}
+
+	if (forceColor !== undefined) {
+		return forceColor;
 	}
 
 	// Check for Azure DevOps pipelines.
